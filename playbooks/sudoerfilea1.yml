@@ -1,0 +1,8 @@
+---
+- name: create sudoer file for user a1
+  hosts: allservers
+  tasks:
+   - name: create a sudoer file for user a1 if it does not exist
+     copy:
+      dest: /etc/sudoers.d/a1pass
+      content: "student ALL=(ALL) NOPASSWD: ALL"

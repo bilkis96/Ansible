@@ -1,0 +1,12 @@
+---
+- name: apt update
+  hosts: allservers
+  tasks:
+    - name: Run the equivalent of "apt-get update" as a separate step
+      apt:
+        update_cache: yes
+
+    - name: Install vim (state=present is optional)
+      apt:
+       name: vim
+       state: present

@@ -1,0 +1,35 @@
+---
+- name: user creation play book for webservers
+  hosts: webservers
+  tasks:
+    - name: Run the equivalent of "apt-get update" as a separate step
+      apt:
+        update_cache: yes
+    - name: Install nginx (state=present is optional)
+      apt:
+       name: nginx
+       state: present
+       update_cache: yes
+      notify:
+       - restart nginx
+    - name: create a index.html file with welcome message
+      copy:
+       dest: /var/www/html/index.html
+       content: "welcome to Nginx deployed via ansible playbook - 73"
+    - name: Start service nginx, if not started
+      service:
+       name: nginx
+       state: started      
+    - name: Start service nginx, if not started
+      service:
+       name: nginx
+       state: started  
+    - name: Allow everything and enable UFW
+      ufw:
+       state: enabled
+       policy: allow
+    - name: Allow all access to tcp port 80
+      ufw:
+       rule: allow
+       port: '80'
+       proto: tcp

@@ -1,0 +1,12 @@
+---
+- name: play for copying file
+  hosts: allservers
+  tasks:  
+   - name: copying cal2025.txt
+     copy:
+      src: /home/student/Ansible/adhoc/cal2025.txt
+      dest: /tmp
+      owner: student
+      group: root
+      mode: '0777' 
+      
